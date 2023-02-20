@@ -1,0 +1,37 @@
+## Declaring a variable in Play level
+
+- name: Declare a variable in play level
+  hosts: all
+  connection: local
+  vars:
+    URL: abc.example.com
+
+  tasks:
+    - name: Access the Variable
+      ansible.builtin.debug:
+        msg: URL == {{URL}}
+
+## Declaring a variable from a different file
+
+- name: Declaring a variable from a file
+  hosts: all
+  connection: local
+  vars_files:
+    - var.yml
+  tasks:
+    - name: Accessing the variable from the file
+      ansible.builtin.debug:
+        msg: URL == {{URL}}
+
+## Declaring a variable on a Task
+
+- name: Declaring the variable on the Task
+  hosts: all
+  connection: local
+  tasks:
+    - name: Access the variable in the Task
+      ansible.builtin.debug:
+        msg: URL =={{URL}}
+      vars:
+        URL: efg.example.com
+
