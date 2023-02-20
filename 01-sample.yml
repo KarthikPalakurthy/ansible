@@ -1,0 +1,6 @@
+-name: DevOps
+-hosts: all
+tasks:
+  -name: Print Hello
+  ansible.builtin.debug:
+    message: Hello World!
