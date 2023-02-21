@@ -71,7 +71,7 @@
       ansible.builtin.debug:
         msg: "{{out}}" ##We are using "" in this scenario as we are calling out the variables.
 
-## Setting a fact - helps to carry an output from one task to other
+## Setting a fact - helps to carry an output from one task to other.
 
 - name: Registering a variable
   hosts: all
