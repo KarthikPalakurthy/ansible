@@ -35,3 +35,54 @@
       vars:
         URL: efg.example.com
 
+## Declaring a variable directly on the terminal
+
+- name: Declaring the variable
+  hosts: all
+  connection: local
+  tasks:
+    - name: Accessing the variable on the shell
+      ansible.builtin.debug:
+        msg: URL == {{URL}}
+
+## For the same code, the command line variable can be accessed on the shell.
+## Ex: anible-playbook -i inv 02-vars.yml -e URL=ghi.example.com ##All the above URL's are replaced with the URL on the command line. This is due to variable presidency.
+
+##Ansible predefined variables are called facts.
+
+- name: Accessing the fact
+  hosts: all
+  connection: local
+  tasks:
+    - name: Accessing the facts
+      ansible.builtin.debug:
+        msg: Ansible host name =={{ansible_fqdn}}
+
+##Registering a variable:
+
+- name: Registering a variable
+  hosts: all
+  connection: local
+  tasks:
+    - name: running a shell command
+      anisble.builtin.shell: uptime
+      register: out
+    - name: Print Out
+      ansible.builtin.debug:
+        msg: "{{out}}" ##We are using "" in this scenario as we are calling out the variables.
+
+## Setting a fact - helps to carry an output from one task to other
+
+- name: Registering a variable
+  hosts: all
+  connection: local
+  tasks:
+    - name: running a shell command
+      anisble.builtin.shell: uptime
+      register: out
+    - name: Print Out
+      ansible.builtin.debug:
+        msg: "{{out}}"
+    - name: Setting a fact
+      ansible.builtin.set_fact:
+        OUTPUT: "{{OUT}}"
